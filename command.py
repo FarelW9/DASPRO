@@ -87,7 +87,7 @@ def hapusjin():
             for i in range(1, length(data_candi)):
                 if data_candi[i][1] == jin_username:
                     delete('candi.csv', i)
-           print("Jin telah berhasil dihapus dari alam gaib.")
+            print("Jin telah berhasil dihapus dari alam gaib.")
     else:  # jin_already==False
         print("Tidak ada jin dengan username tersebut.")
     return data_user
@@ -118,14 +118,18 @@ def ubahjin():
         print("Tidak ada jin dengan username tersebut.")
     return data_user
 
+
 def bangun():
     return 0
+
 
 def kumpul():
     return 0
 
+
 def batchkumpul():
     return 0
+
 
 def find_jinterajin_jintermalas(data):
     list_jin_pembangun = []
@@ -172,8 +176,13 @@ def laporanjin():
     print(f"Total Jin: {jin_pembangun_amount+jin_pengumpul_amount}")
     print(f"Total Jin Pengumpul: {jin_pengumpul_amount}")
     print(f"Total Jin Pembangun: {jin_pembangun_amount}")
-    print(f"Jin Terajin: {jin_terajin}")
-    print(f"Jin Termalas: {jin_termalas}")
+    if jin_pembangun_amount == 0:
+        print(f"Jin Terajin: - ")
+        print(f"Jin Termalas: - ")
+    else:
+        print(f"Jin Terajin: {jin_terajin}")
+        print(f"Jin Termalas: {jin_termalas}")
+
     print(f"Jumlah Pasir: {data_bahan_bangunan[1][2]} unit")
     print(f"Jumlah Batu: {data_bahan_bangunan[2][2]} unit")
     print(f"Jumlah Air: {data_bahan_bangunan[3][2]} unit")
