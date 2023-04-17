@@ -87,6 +87,7 @@ def hapusjin():
             for i in range(1, length(data_candi)):
                 if data_candi[i][1] == jin_username:
                     delete('candi.csv', i)
+           print("Jin telah berhasil dihapus dari alam gaib.")
     else:  # jin_already==False
         print("Tidak ada jin dengan username tersebut.")
     return data_user
@@ -106,11 +107,13 @@ def ubahjin():
                 "Jin ini bertipe “Pengumpul”. Yakin ingin mengubah ke tipe “Pembangun” (Y/N)?")
             if jin_confirm == "Y":
                 data_user[find_jin][2] = "2"
+                print("Jin telah berhasil diubah.")
         else:  # tipe jin pengumpul
             jin_confirm = input(
                 "Jin ini bertipe “Pembangun”. Yakin ingin mengubah ke tipe “Pengumpul” (Y/N)?")
             if jin_confirm == "Y":
                 data_user[find_jin][2] = "1"
+                print("Jin telah berhasil diubah.")
     else:
         print("Tidak ada jin dengan username tersebut.")
     return data_user
@@ -171,9 +174,9 @@ def laporanjin():
     print(f"Total Jin Pembangun: {jin_pembangun_amount}")
     print(f"Jin Terajin: {jin_terajin}")
     print(f"Jin Termalas: {jin_termalas}")
-    print(f"Jumlah Pasir: {data_bahan_bangunan[1][2]}")
-    print(f"Jumlah Batu: {data_bahan_bangunan[2][2]}")
-    print(f"Jumlah Air: {data_bahan_bangunan[3][2]}")
+    print(f"Jumlah Pasir: {data_bahan_bangunan[1][2]} unit")
+    print(f"Jumlah Batu: {data_bahan_bangunan[2][2]} unit")
+    print(f"Jumlah Air: {data_bahan_bangunan[3][2]} unit")
     return 0
 
 def hancurkancandi():
