@@ -26,5 +26,7 @@ while Keluar==False :
         data_user = hapusjin()
     elif command == "ubahjin":
         data_user = ubahjin()
+    elif command == "bangun":
+        data_user = bangun()
     elif command == "laporanjin":
         laporanjin()
