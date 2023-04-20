@@ -114,31 +114,6 @@ def read_candi(file_csv):
             k+=1
         return (data_fix)
 
-def write(file_csv, data):
-    with open(file_csv, 'a') as csv:
-        csv_line = ';'.join(str(x) for x in data) + '\n'
-        csv.write(csv_line)
-
-def edit(file_csv,data_new,row):
-    with open(file_csv) as csv: 
-        data=csv.readlines()
-
-    if row < length(data):
-        data[row]=f"{data_new[0]};{data_new[1]};{data_new[2]}\n"
-
-        with open(file_csv, 'w') as csv:
-            csv.writelines(data)
-
-def delete(file_csv, row):
-    with open(file_csv, 'r') as csv:
-        data = csv.readlines()
-
-    if row < length(data):
-        del data[row]
-
-        with open(file_csv, 'w') as csv:
-            csv.writelines(data)
-
 def delete_user(list,j):
     list_new=["%" for i in range(104)]
     k=0
