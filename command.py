@@ -34,7 +34,7 @@ def logout(role):
     return role
 
 def summonjin(user,role):
-    if length(user)<104 and role=="bandung_bondowoso":
+    if length(user)<103 and role=="bandung_bondowoso":
         print("Jenis jin yang dapat dipanggil:")
         print(" (1) Pengumpul - Bertugas mengumpulkan bahan bangunan")
         print(" (2) Pembangun - Bertugas membangun candi")
@@ -87,7 +87,7 @@ def summonjin(user,role):
                 valid=False              
         
         return new_user
-    elif length(user)>=104:
+    elif length(user)>=103:
         return 0
     if role!="bandung_bondowoso":
         return 1
@@ -237,6 +237,7 @@ def batchkumpul(user,bahan,role,seed):
         
         if pengumpul==0:
             print("Kumpul gagal. Anda tidak punya jin pengumpul. Silahkan summon\nterlebih dahulu.")
+            return seed,bahan
         else:
             pasir_temp=int(bahan[1][2])
             batu_temp=int(bahan[2][2])
@@ -346,42 +347,49 @@ def batchbangun(user,candi,bahan,role,seed):
 def laporanjin(user,candi,bahan,role):
     if role=="bandung_bondowoso":
         total=length(user)-3
-        total_pengumpul=0
-        total_pembangun=0
-        for i in range(3,length(user)):
-            if user[i][2]=="jin_pengumpul":
-                total_pengumpul+=1
-            if user[i][2]=="jin_pembangun":
-                total_pembangun+=1
-        if total_pembangun==0:
-            malas="-"
-            rajin="-"
+        if total>0:
+            total_pengumpul=0
+            total_pembangun=0
+            for i in range(3,length(user)):
+                if user[i][2]=="jin_pengumpul":
+                    total_pengumpul+=1
+                if user[i][2]=="jin_pembangun":
+                    total_pembangun+=1
+            if total_pembangun==0:
+                malas="-"
+                rajin="-"
+            else:
+                user_list=["%" for i in range (length(user)+1)]
+                for i in range (length(user)):
+                    user_list[i]=user[i][0]
+                malas=(2**32)
+                rajin=-(2**32)
+                siapa_malas="z"*(2**10)
+                siapa_rajin="z"*(2**10)
+                for i in range(3,length(user_list)):
+                    kontribusi=0
+                    for j in range(1,102):
+                        if candi[j]!="%" and user_list[i]==candi[j][1]:
+                            kontribusi+=1
+                    print(user_list[i])
+                    if kontribusi>rajin:
+                        rajin=kontribusi
+                        siapa_rajin=user_list[i]
+                    elif kontribusi==rajin and user_list[i]<siapa_rajin:
+                        rajin=kontribusi
+                        siapa_rajin=user_list[i]                    
+                    if kontribusi<malas:
+                        malas=kontribusi
+                        siapa_malas=user_list[i]
+                    elif kontribusi==malas and user_list[i]<siapa_rajin:
+                        malas=kontribusi
+                        siapa_malas=user_list[i]
         else:
-            user_list=["%" for i in range (length(user)+1)]
-            for i in range (length(user)):
-                user_list[i]=user[i][0]
-            malas=(2**32)
-            rajin=-(2**32)
-            siapa_malas="z"*(2**10)
-            siapa_rajin="z"*(2**10)
-            for i in range(3,length(user_list)):
-                kontribusi=0
-                for j in range(1,102):
-                    if candi[j]!="%" and user_list[i]==candi[j][1]:
-                        kontribusi+=1
-                print(user_list[i])
-                if kontribusi>rajin:
-                    rajin=kontribusi
-                    siapa_rajin=user_list[i]
-                elif kontribusi==rajin and user_list[i]<siapa_rajin:
-                    rajin=kontribusi
-                    siapa_rajin=user_list[i]                    
-                if kontribusi<malas:
-                    malas=kontribusi
-                    siapa_malas=user_list[i]
-                elif kontribusi==malas and user_list[i]<siapa_rajin:
-                    malas=kontribusi
-                    siapa_malas=user_list[i] 
+            total_pembangun=0
+            total_pengumpul=0
+            siapa_malas="-"
+            siapa_rajin="-"
+
 
         pasir=bahan[1][2]
         batu=bahan[2][2]
@@ -485,12 +493,12 @@ def hancurkancandi(candi,role):
 def ayamberkokok(candi,role):
     if role=="roro_jonggrang":
         print("Kukuruyuk.. Kukuruyuk..")
-        print(f"\nJumlah Candi: {length(candi)}")
-        if 0<=length(candi)<100:
+        print(f"\nJumlah Candi: {length(candi)-1}")
+        if 0<=length(candi)-1<100:
             print("\nSelamat, Roro Jonggrang memenangkan permainan!")
             print("\n*Bandung Bondowoso angry noise*")
             print("Roro Jonggrang dikutuk menjadi candi.")
-        elif length(candi)>=100:
+        elif length(candi)-1>=100:
             print("\nYah, Bandung Bondowoso memenangkan permainan!")
 
     else :
@@ -598,6 +606,8 @@ def help(role):
         print("   Untuk keluar dari akun yang digunakan sekarang")
         print("2. kumpul")
         print("   Untuk mengumpulkan resource candi")
+        print("3. save")
+        print("   Untuk menyimpan data")
 
     elif role=="jin_pembangun":
         print("====================== HELP ======================")
@@ -605,6 +615,8 @@ def help(role):
         print("   Untuk keluar dari akun yang digunakan sekarang")
         print("2. bangun")
         print("   Untuk membangun candi")
+        print("3. save")
+        print("   Untuk menyimpan data")
 
     elif role==0:
         print("====================== HELP ======================")
@@ -614,6 +626,8 @@ def help(role):
         print("   Untuk memuat file eksternal ke dalam permainan")
         print("3. exit")
         print("   Untuk keluar dari program dan kembali ke terminal")
+        print("4. save")
+        print("   Untuk menyimpan data")
 
     else:
         return None
@@ -624,6 +638,7 @@ def exit(Exit,user,bahan,candi):
         simpan=input("Apakah Anda mau melakukan penyimpanan file yang sudah diubah? (y/n)")
         if simpan == "y" or simpan=="Y":
             save(user,bahan,candi)
+            valid=True
         elif simpan=="n"or simpan=="N" :
             valid=True
             Exit=True

@@ -50,7 +50,6 @@ if valid:
                 print("Tidak bisa mengakses command “bangun” selain Jin Pembangun.")
             else:
                 seed,data_candi,data_bahan=bngn   
-                print(seed)        
         elif command=="kumpul" :
             kmpl=kumpul(data_bahan,role,seed)
             if kmpl=="%":
@@ -69,7 +68,6 @@ if valid:
                 print("Tidak bisa mengakses command “batchbangun” selain Bandung Bondowoso.")
             else:
                 seed,data_candi,data_bahan=bb
-            print(data_candi)
         elif command=="laporanjin":
             lj=laporanjin(data_user,data_candi,data_bahan,role)
             if lj==1:
@@ -84,7 +82,6 @@ if valid:
                 print("Tidak bisa mengakses command “hancurkancandi” selain Roro Jonggrang.")
             else:
                 data_candi=hc
-            print(data_candi)
         elif command=="ayamberkokok":
             ab=ayamberkokok(data_candi,role)
             if ab==1:

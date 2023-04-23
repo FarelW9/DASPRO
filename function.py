@@ -8,22 +8,22 @@ def start():
     parser.add_argument('folder',nargs="?",default="")
     args = parser.parse_args()
 
-    if args.folder!="":
-        if not os.path.exists("Save"):
-            args.folder="New"
-            folder = os.listdir(args.folder)
-            for file in folder:
-                file_path = os.path.join(args.folder, file)
-                if file=="user.csv":
-                    data_user=read_user(file_path)
-                elif file=="bahan_bangunan.csv":
-                    data_bahan=read_bahan(file_path)
-                elif file=="candi.csv":
-                    data_candi=read_candi(file_path)
-            data_bahan=isibahan(data_bahan)
-            return(valid,data_user,data_bahan,data_candi)
-
-        else:
+    if not os.path.exists("Save"):
+        args.folder="New"
+        folder = os.listdir(args.folder)
+        for file in folder:
+            file_path = os.path.join(args.folder, file)
+            if file=="user.csv":
+                data_user=read_user(file_path)
+            elif file=="bahan_bangunan.csv":
+                data_bahan=read_bahan(file_path)
+            elif file=="candi.csv":
+                data_candi=read_candi(file_path)
+        data_bahan=isibahan(data_bahan)
+        return(valid,data_user,data_bahan,data_candi)
+    else:
+        if args.folder!="":
+            
             cd=os.path.join("Save", args.folder)
             if not os.path.isdir(cd):
                 print(f"\nFolder “{args.folder}” tidak ditemukan.")
@@ -32,7 +32,6 @@ def start():
             else:
                 folder = os.listdir(cd)
                 for file in folder:
-                    print(file)
                     file_path = os.path.join("Save",args.folder, file)
                     if file=="user.csv":
                         data_user=read_user(file_path)
@@ -42,11 +41,11 @@ def start():
                         data_candi=read_candi(file_path)
                 data_bahan=isibahan(data_bahan)
             return(valid,data_user,data_bahan,data_candi)
-    else:
-        print("\nTidak ada nama folder yang diberikan!")
-        print("\nUsage: python main.py <nama_folder>")
-        valid=False
-        return(valid,0,0,0)
+        else:
+            print("\nTidak ada nama folder yang diberikan!")
+            print("\nUsage: python main.py <nama_folder>")
+            valid=False
+            return(valid,0,0,0)
 
 def length (list):
     count=0
