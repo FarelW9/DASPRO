@@ -1,19 +1,22 @@
 from function import *
 from command import *
+import time
 
 valid,data_user,data_bahan,data_candi=start()
 
 if valid:
     print("\nLoading...")
+    time.sleep(1)
     print("\nSelamat datang di program “Manajerial Candi”")
     print("Silahkan masukkan username Anda")
     role=0
-    seed=4
+    seed=int(time.time()//1)
     Keluar=False
     while Keluar==False :
         command=input('>>> ')
         if command== "login":
             if role != 0 :
+                time.sleep(0.25)
                 print("Login gagal!")
                 print(f"Anda telah login dengan username {username}, silahkan lakukan “logout” sebelum melakukan login kembali.")
             else :
@@ -90,7 +93,6 @@ if valid:
                 Keluar=True
         elif command=="save":
             save(data_user,data_bahan,data_candi)
-            Keluar=True
         elif command == "help":
             help(role)
         elif command=="exit":

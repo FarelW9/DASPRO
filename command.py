@@ -1,5 +1,6 @@
 import os
 from function import *
+import time
 
 def login(user):
     Username=input("Username : ")
@@ -14,17 +15,21 @@ def login(user):
                 break
     
     if user_valid==True and pass_valid==True:
+        time.sleep(0.25)
         print (f'\nSelamat datang, {Username}!\nMasukkan command “help” untuk daftar command yang dapat kamu panggil.')
         return (user[i][2],user[i][0])
     elif user_valid==True and pass_valid==False:
+        time.sleep(0.25)
         print("\nPassword salah!")
         return 0,0
     else:
+        time.sleep(0.25)
         print("\nUsername tidak terdaftar!")
         return 0,0
 
 def logout(role):
     if role == 0 :
+        time.sleep(0.25)
         print("Logout gagal!")
         print("Anda belum login, silahkan login terlebih dahulu sebelum melakukan logout")
         role=0
@@ -58,6 +63,7 @@ def summonjin(user,role):
             j=1
             while j<length(user):
                 if user[j][0]==nama:
+                    time.sleep(0.25)
                     print(f"\nUsername “{nama}” sudah diambil!")
                     valid=False
                     break
@@ -77,11 +83,16 @@ def summonjin(user,role):
             if 5<=len_pass<=25 :
                 valid=True
                 new_user[1]=password
+                time.sleep(0.25)
                 print("\nMengumpulkan sesajen...")
+                time.sleep(0.25)
                 print("Menyerahkan sesajen...")
+                time.sleep(0.25)
                 print("Membacakan mantra...")
+                time.sleep(0.25)
                 print(f"\nJin {new_user[0]} berhasil dipanggil!")
             else:
+                time.sleep(0.25)
                 print("\nPassword panjangnya harus 5-25 karakter!")
                 password=input("\nMasukkan password jin: ")  
                 valid=False              
@@ -107,6 +118,7 @@ def hapusjin(user,candi,role):
                 else :
                     j+=1
             if j==length(user):
+                time.sleep(0.25)
                 print("\nTidak ada jin dengan username tersebut.")
             else:
                 valid=input(f"Apakah anda yakin ingin menghapus jin dengan username {name_del} (Y/N)? ")
@@ -120,6 +132,7 @@ def hapusjin(user,candi,role):
                                 break
                         if i==length(candi)-1:
                             habis=True
+                    time.sleep(0.25)
                     print("Jin telah berhasil dihapus dari alam gaib.")
                     return user,candi
                 else:
@@ -137,12 +150,14 @@ def ubahjin(user,role):
             else :
                 j+=1
         if j==length(user):
+            time.sleep(0.25)
             print("\nTidak ada jin dengan username tersebut.")
         else:
             if user[j][2]=="jin_pengumpul":
                 valid=input("Jin ini bertipe “Pengumpul”. Yakin ingin mengubah ke tipe “Pembangun” (Y/N)? ")
                 if valid=="Y" or valid=="y":
                     user[j][2]="jin_pembangun"
+                    time.sleep(0.25)
                     print("\nJin telah berhasil diubah.")
                     return user
                 else:
@@ -151,6 +166,7 @@ def ubahjin(user,role):
                 valid=input("Jin ini bertipe “Pembangun”. Yakin ingin mengubah ke tipe “Pengumpul” (Y/N)? ")               
                 if valid=="Y" or valid=="y":
                     user[j][2]="jin_pengumpul"
+                    time.sleep(0.25)
                     print("\nJin telah berhasil diubah.")
                     return user
                 else:
@@ -199,10 +215,12 @@ def bangun(candi,username,bahan,role,seed):
                 sisa=0
             else:
                 sisa=100-count
+            time.sleep(0.25)
             print("Candi berhasil dibangun.")
             print(f"Sisa candi yang perlu dibangun: {sisa}")
             return seed,candi,bahan
         else:
+            time.sleep(0.25)
             print("Bahan bangunan tidak mencukupi")
             print("Candi tidak bisa dibangun.")
             return temp,candi,bahan
@@ -220,7 +238,8 @@ def kumpul(bahan,role,seed):
         bahan[1][2]=str(pasir_new)
         bahan[2][2]=str(batu_new)
         bahan[3][2]=str(air_new)
-
+        
+        time.sleep(0.25)
         print(f"Jin menemukan {pasir} pasir, {batu} batu, dan {air} air")
 
         return seed,bahan
@@ -259,6 +278,7 @@ def batchkumpul(user,bahan,role,seed):
             bahan[2][2]=str(batu_temp)
             bahan[3][2]=str(air_temp)
 
+            time.sleep(0.25)
             print(f"Mengerahkan {pengumpul} jin untuk mengumpulkan bahan.")
             print(f"Jin menemukan {temu_pasir} pasir, {temu_batu} batu, dan {temu_air} air")
 
@@ -297,7 +317,7 @@ def batchbangun(user,candi,bahan,role,seed):
                 pasir_list[i]=pasir
                 batu_list[i]=batu
                 air_list[i]=air
-            
+
             if pasir_temp-perlu_pasir>=0 and batu_temp-perlu_batu>=0 and air_temp-perlu_air>=0:
                 pasir_new=pasir_temp-perlu_pasir
                 batu_new=batu_temp-perlu_batu
@@ -306,6 +326,7 @@ def batchbangun(user,candi,bahan,role,seed):
                 bahan[2][2]=str(batu_new)
                 bahan[3][2]=str(air_new)
 
+                time.sleep(0.25)
                 print(f"Mengerahkan {pembangun} jin untuk menmbangun candi dengan total bahan {perlu_pasir} pasir, {perlu_batu} batu, dan {perlu_air} air.")
                 print(f"Jin berhasil membangun total {pembangun} candi")
 
@@ -328,15 +349,16 @@ def batchbangun(user,candi,bahan,role,seed):
                 return seed,candi,bahan
             
             else:
-                kurang_pasir =pasir_temp-perlu_pasir
+                kurang_pasir = perlu_pasir-pasir_temp
                 if kurang_pasir<0:
-                    kurang_pasir=(-1)*kurang_pasir
-                kurang_batu=batu_temp-perlu_batu
+                    kurang_pasir=0
+                kurang_batu=perlu_batu-batu_temp
                 if kurang_batu<0:
-                    kurang_batu=(-1)*kurang_batu
-                kurang_air=air_temp-perlu_air
+                    kurang_batu=0
+                kurang_air=perlu_air-air_temp
                 if kurang_air<0:
-                    kurang_air=(-1)*kurang_air
+                    kurang_air=0
+                time.sleep(0.25)
                 print(f"Mengerahkan {pembangun} jin untuk menmbangun candi dengan total bahan {perlu_pasir} pasir, {perlu_batu} batu, dan {perlu_air} air.")
                 print(f"Bangun gagal. Kurang {kurang_pasir} pasir, {kurang_batu} batu, dan {kurang_air} air")
                 return temp,candi,bahan
@@ -371,7 +393,6 @@ def laporanjin(user,candi,bahan,role):
                     for j in range(1,102):
                         if candi[j]!="%" and user_list[i]==candi[j][1]:
                             kontribusi+=1
-                    print(user_list[i])
                     if kontribusi>rajin:
                         rajin=kontribusi
                         siapa_rajin=user_list[i]
@@ -394,7 +415,7 @@ def laporanjin(user,candi,bahan,role):
         pasir=bahan[1][2]
         batu=bahan[2][2]
         air=bahan[3][2]
-
+        time.sleep(0.5)
         print(f"\n> Total Jin: {total}")
         print(f"> Total Jin Pengumpul: {total_pengumpul}")
         print(f"> Total Jin Pembangun: {total_pembangun}")
@@ -449,6 +470,7 @@ def laporancandi(candi,role):
                     id_murah=int(candi[i][0])
 
         if length(candi_list)==0:
+            time.sleep(0.5)
             print(f"\n> Total Candi: {length(candi_list)}")
             print(f"> Total Pasir yang digunakan: {pasir_total}")
             print(f"> Total Batu yang digunakan: {batu_total}")
@@ -457,6 +479,7 @@ def laporancandi(candi,role):
             print(f"> ID Candi Termurah: -")            
 
         else:
+            time.sleep(1)
             print(f"\n> Total Candi: {length(candi_list)}")
             print(f"> Total Pasir yang digunakan: {pasir_total}")
             print(f"> Total Batu yang digunakan: {batu_total}")
@@ -478,12 +501,14 @@ def hancurkancandi(candi,role):
         if ada==True:
             valid=input(f"Apakah anda yakin ingin menghancurkan candi ID: {ID} (Y/N)? ")
             if valid=="Y" or valid=="y":
+                time.sleep(0.25)
                 print("\nCandi telah berhasil dihancurkan.")
                 candi=delete_candi(candi,i)
                 return candi
             else:
                 return candi
         else:
+            time.sleep(0.25)
             print("\nTidak ada candi dengan ID tersebut.")
             return candi
 
@@ -492,11 +517,14 @@ def hancurkancandi(candi,role):
 
 def ayamberkokok(candi,role):
     if role=="roro_jonggrang":
+        time.sleep(0.25)
         print("Kukuruyuk.. Kukuruyuk..")
         print(f"\nJumlah Candi: {length(candi)-1}")
         if 0<=length(candi)-1<100:
             print("\nSelamat, Roro Jonggrang memenangkan permainan!")
+            time.sleep(0.25)
             print("\n*Bandung Bondowoso angry noise*")
+            time.sleep(0.25)
             print("Roro Jonggrang dikutuk menjadi candi.")
         elif length(candi)-1>=100:
             print("\nYah, Bandung Bondowoso memenangkan permainan!")
@@ -510,7 +538,9 @@ def save(user,bahan,candi):
         cd=os.path.join("Save",nama_folder)
         if not os.path.exists(cd):
             print("\nSaving...")
+            time.sleep(0.25)
             print(f"\nMembuat folder {nama_folder}!")
+            time.sleep(0.25)
             print(f"\nBerhasil menyimpan data di folder {nama_folder}")
             os.makedirs(cd)
             with open(f"Save/{nama_folder}/user.csv", 'w') as csv:
@@ -530,6 +560,7 @@ def save(user,bahan,candi):
                     csv.write(csv_line)
         else:
             print("\nSaving...")
+            time.sleep(0.25)
             print(f"\nBerhasil menyimpan data di folder {nama_folder}")
             with open(f"Save/{nama_folder}/user.csv", 'w') as csv:
                 for i in range(length(user)):
@@ -639,8 +670,9 @@ def exit(Exit,user,bahan,candi):
         if simpan == "y" or simpan=="Y":
             save(user,bahan,candi)
             valid=True
+            Exit=True
         elif simpan=="n"or simpan=="N" :
             valid=True
             Exit=True
-            return Exit
+        return Exit
         
