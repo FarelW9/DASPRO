@@ -1,6 +1,7 @@
 import os
 from function import *
 import time
+import argparse
 
 def login(user:list) -> str and str :
     Username=input("Username : ")
@@ -13,7 +14,7 @@ def login(user:list) -> str and str :
             if Password==user[i][1]:
                 pass_valid=True
                 break
-    
+
     if user_valid==True and pass_valid==True:
         time.sleep(0.25)
         print (f'\nSelamat datang, {Username}!\nMasukkan command “help” untuk daftar command yang dapat kamu panggil.')
@@ -531,6 +532,51 @@ def ayamberkokok(candi:list,role:str) -> None:
 
     else :
         return 1
+
+def load() -> bool and list and list and list:
+    valid=True
+    parser = argparse.ArgumentParser()
+    parser.add_argument('folder',nargs="?",default="")
+    args = parser.parse_args()
+
+    if not os.path.exists("Save"):
+        args.folder="New"
+        folder = os.listdir(args.folder)
+        for file in folder:
+            file_path = os.path.join(args.folder, file)
+            if file=="user.csv":
+                data_user=read_user(file_path)
+            elif file=="bahan_bangunan.csv":
+                data_bahan=read_bahan(file_path)
+            elif file=="candi.csv":
+                data_candi=read_candi(file_path)
+        data_bahan=isibahan(data_bahan)
+        return(valid,data_user,data_bahan,data_candi)
+    else:
+        if args.folder!="":
+            
+            cd=os.path.join("Save", args.folder)
+            if not os.path.isdir(cd):
+                print(f"\nFolder “{args.folder}” tidak ditemukan.")
+                valid=False
+                return(valid,0,0,0)
+            else:
+                folder = os.listdir(cd)
+                for file in folder:
+                    file_path = os.path.join("Save",args.folder, file)
+                    if file=="user.csv":
+                        data_user=read_user(file_path)
+                    elif file=="bahan_bangunan.csv":
+                        data_bahan=read_bahan(file_path)
+                    elif file=="candi.csv":
+                        data_candi=read_candi(file_path)
+                data_bahan=isibahan(data_bahan)
+            return(valid,data_user,data_bahan,data_candi)
+        else:
+            print("\nTidak ada nama folder yang diberikan!")
+            print("\nUsage: python main.py <nama_folder>")
+            valid=False
+            return(valid,0,0,0)
 
 def save(user:list,bahan:list,candi:list) -> None:
     nama_folder=input("Masukkan nama folder: ")

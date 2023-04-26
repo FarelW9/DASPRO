@@ -2,7 +2,7 @@ from function import *
 from command import *
 import time
 
-valid,data_user,data_bahan,data_candi=start()
+valid,data_user,data_bahan,data_candi=load()
 
 if valid:
     print("\nLoading...")
