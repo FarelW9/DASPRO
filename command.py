@@ -2,7 +2,7 @@ import os
 from function import *
 import time
 
-def login(user):
+def login(user:list) -> str and str :
     Username=input("Username : ")
     Password=input("Password : ")
     user_valid=False
@@ -27,7 +27,7 @@ def login(user):
         print("\nUsername tidak terdaftar!")
         return 0,0
 
-def logout(role):
+def logout(role:str) -> str:
     if role == 0 :
         time.sleep(0.25)
         print("Logout gagal!")
@@ -38,7 +38,7 @@ def logout(role):
     
     return role
 
-def summonjin(user,role):
+def summonjin(user:list,role:str) -> list :
     if length(user)<103 and role=="bandung_bondowoso":
         print("Jenis jin yang dapat dipanggil:")
         print(" (1) Pengumpul - Bertugas mengumpulkan bahan bangunan")
@@ -103,7 +103,7 @@ def summonjin(user,role):
     if role!="bandung_bondowoso":
         return 1
 
-def hapusjin(user,candi,role):
+def hapusjin(user:list,candi:list,role:str) -> list and list:
     if role=="bandung_bondowoso":
         name_del=input("Masukkan username jin : ")
         if name_del=="Bondowoso":
@@ -140,7 +140,7 @@ def hapusjin(user,candi,role):
     else :
         return 1
 
-def ubahjin(user,role):
+def ubahjin(user:list,role:str) -> list:
     if role=="bandung_bondowoso":
         role_change=input("Masukkan username jin : ")
         j=1
@@ -174,7 +174,7 @@ def ubahjin(user,role):
     else :
         return 1
 
-def bangun(candi,username,bahan,role,seed):
+def bangun(candi:list,username:str,bahan:list,role:str,seed:int) -> int and list and list:
     if role=="jin_pembangun":
         temp=seed
         pasir,seed=random(1,5,seed)
@@ -227,7 +227,7 @@ def bangun(candi,username,bahan,role,seed):
     else :
         return "%"
 
-def kumpul(bahan,role,seed):
+def kumpul(bahan:list,role:str,seed:int) -> int and list:
     if role=="jin_pengumpul":
         pasir,seed=random(0,5,seed)
         batu,seed=random(0,5,seed)
@@ -247,7 +247,7 @@ def kumpul(bahan,role,seed):
     else :
         return "%"
 
-def batchkumpul(user,bahan,role,seed):
+def batchkumpul(user:list,bahan:list,role:str,seed:int) -> int and list:
     if role=="bandung_bondowoso":
         pengumpul=0
         for i in range(length(user)):
@@ -287,7 +287,7 @@ def batchkumpul(user,bahan,role,seed):
     else :
         return "%"
 
-def batchbangun(user,candi,bahan,role,seed):
+def batchbangun(user:list,candi:list,bahan:list,role:str,seed:int) -> int and list and list:
     if role=="bandung_bondowoso":
         pembangun=0
         for i in range (length(user)):
@@ -366,7 +366,7 @@ def batchbangun(user,candi,bahan,role,seed):
     else :
         return "%"
 
-def laporanjin(user,candi,bahan,role):
+def laporanjin(user:list,candi:list,bahan:list,role:str) -> None:
     if role=="bandung_bondowoso":
         total=length(user)-3
         if total>0:
@@ -429,7 +429,7 @@ def laporanjin(user,candi,bahan,role):
     else :
         return 1
 
-def laporancandi(candi,role):
+def laporancandi(candi:list,role:str)->None:
     if role=="bandung_bondowoso":
         candi_list=["%" for i in range (100)]
         k=0
@@ -490,7 +490,7 @@ def laporancandi(candi,role):
     else :
         return 1
 
-def hancurkancandi(candi,role):
+def hancurkancandi(candi:list,role:str)->list:
     if role=="roro_jonggrang":
         ID=input("Masukkan ID candi: ")
         ada=False
@@ -515,7 +515,7 @@ def hancurkancandi(candi,role):
     else :
         return 1
 
-def ayamberkokok(candi,role):
+def ayamberkokok(candi:list,role:str) -> None:
     if role=="roro_jonggrang":
         time.sleep(0.25)
         print("Kukuruyuk.. Kukuruyuk..")
@@ -532,7 +532,7 @@ def ayamberkokok(candi,role):
     else :
         return 1
 
-def save(user,bahan,candi):
+def save(user:list,bahan:list,candi:list) -> None:
     nama_folder=input("Masukkan nama folder: ")
     if os.path.exists("Save"):
         cd=os.path.join("Save",nama_folder)
@@ -598,7 +598,7 @@ def save(user,bahan,candi):
                 csv_line = ';'.join(str(x) for x in data) + '\n'
                 csv.write(csv_line)
 
-def help(role):
+def help(role:list) -> None:
     if role=="bandung_bondowoso":
         print("===================== HELP ======================")
         print("1. logout")
@@ -663,7 +663,7 @@ def help(role):
     else:
         return None
 
-def exit(Exit,user,bahan,candi):
+def exit(Exit:bool,user:list,bahan:list,candi:list) -> bool:
     valid=False
     while valid==False:
         simpan=input("Apakah Anda mau melakukan penyimpanan file yang sudah diubah? (y/n)")
