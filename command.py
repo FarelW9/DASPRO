@@ -554,7 +554,6 @@ def load() -> bool and list and list and list:
         return(valid,data_user,data_bahan,data_candi)
     else:
         if args.folder!="":
-            
             cd=os.path.join("Save", args.folder)
             if not os.path.isdir(cd):
                 print(f"\nFolder “{args.folder}” tidak ditemukan.")
@@ -644,7 +643,7 @@ def save(user:list,bahan:list,candi:list) -> None:
                 csv_line = ';'.join(str(x) for x in data) + '\n'
                 csv.write(csv_line)
 
-def help(role:list) -> None:
+def help(role:str) -> None:
     if role=="bandung_bondowoso":
         print("===================== HELP ======================")
         print("1. logout")
@@ -665,6 +664,8 @@ def help(role:list) -> None:
         print("   Untuk mengetahui proses pembangunan candi")
         print("9. save")
         print("   Untuk menyimpan data")
+        print("10. exit")
+        print("   Untuk keluar dari permainan")           
 
     elif role=="roro_jonggrang":
         print("===================== HELP ======================")
@@ -676,6 +677,8 @@ def help(role:list) -> None:
         print("   Untuk menyelesaikan permainan.")
         print("4. save")
         print("   Untuk menyimpan data")
+        print("5. exit")
+        print("   Untuk keluar dari permainan")           
     
     elif role=="jin_pengumpul":
         print("====================== HELP ======================")
@@ -685,6 +688,8 @@ def help(role:list) -> None:
         print("   Untuk mengumpulkan resource candi")
         print("3. save")
         print("   Untuk menyimpan data")
+        print("4. exit")
+        print("   Untuk keluar dari permainan")           
 
     elif role=="jin_pembangun":
         print("====================== HELP ======================")
@@ -694,17 +699,17 @@ def help(role:list) -> None:
         print("   Untuk membangun candi")
         print("3. save")
         print("   Untuk menyimpan data")
+        print("4. exit")
+        print("   Untuk keluar dari permainan")           
 
     elif role==0:
         print("====================== HELP ======================")
         print("1. login")
         print("   Untuk masuk menggunakan akun")
-        print("2. load")
-        print("   Untuk memuat file eksternal ke dalam permainan")
-        print("3. exit")
-        print("   Untuk keluar dari program dan kembali ke terminal")
-        print("4. save")
+        print("2. save")
         print("   Untuk menyimpan data")
+        print("3. exit")
+        print("   Untuk keluar dari permainan")        
 
     else:
         return None
@@ -717,8 +722,12 @@ def exit(Exit:bool,user:list,bahan:list,candi:list) -> bool:
             save(user,bahan,candi)
             valid=True
             Exit=True
+            return Exit
         elif simpan=="n"or simpan=="N" :
             valid=True
             Exit=True
-        return Exit
+            return Exit
+        else:
+            valid=False
+
         

@@ -105,23 +105,13 @@ def isibahan(data_bahan:list) -> list: #Fungsi pengecekan data bahan
 def ID_generator(candi:list) -> int: #Fungsi menentukan ID Candi
     id_list=["%" for i in range (100)]
     k=0
-    valid=True
-    for i in range(1,101):
-        if length(id_list)==0 and candi[i]!="%":
-            id_list[k]=candi[i][0]
-            k+=1
-        for j in range(length(id_list)):
-            valid=True
-            if candi[i][0]==id_list[j][0] and candi[i]!="%":
-                valid=False
-        if valid==True and candi[i]!="%":
-            id_list[k]=candi[i][0]
-            k+=1
-    
+    for i in range(1,length(candi)):
+        id_list[k]=int(candi[i][0])
+        k+=1
     for i in range(1,101):
         Ada=True
         for j in range(100):
-            if id_list[j]!="%" and i==int(id_list[j]) :
+            if id_list[j]!="%" and i==id_list[j] :
                 Ada=False
                 break
         if Ada==True:
