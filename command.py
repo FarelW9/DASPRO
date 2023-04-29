@@ -215,7 +215,27 @@ def laporanjin():
     return 0
 
 def hancurkancandi():
-    return 0
+    #Akses oleh Roro Jongrang
+    if data_user:
+        if data_user[2] != "roro_jongrang":
+            print("Hancurkan candi hanya dapat diakses oleh Roro Jongrang!")
+            return
+    else:
+        print("Hancurkan candi hanya dpat diakses oleh Roro Jongrang!")
+        return
+    id = int(input("Masukkan ID candi: "))
+    if cek_id(id):
+        cek = input(f"Apakah anda yakin ingin menghancurkan candi ID: {id} (Y?N)?")
+        if cek in ["Y",'y']:
+            i = 0
+            for candi in data_candi:
+                if candi[0] == ud:
+                    data_candi.pop(i)
+                    print("Candi berhasil dihancurkan.")
+                i += 1
+    else:
+        print("Tidak ada candi dengan ID tersebut.")
+            
 
 def ayamberkokok():
     return 0
