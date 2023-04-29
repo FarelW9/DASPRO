@@ -609,18 +609,33 @@ def save(user:list,bahan:list,candi:list) -> None:
             print(f"\nBerhasil menyimpan data di folder {nama_folder}")
             with open(f"Save/{nama_folder}/user.csv", 'w') as csv:
                 for i in range(length(user)):
-                    data=user[i]
-                    csv_line = ';'.join(str(x) for x in data) + '\n'
+                    data = user[i]
+                    csv_line = ''
+                    for j in range(3):
+                        csv_line += str(data[j])
+                        if j < 2:
+                            csv_line += ';'
+                    csv_line += '\n'
                     csv.write(csv_line)
             with open(f"Save/{nama_folder}/bahan_bangunan.csv", 'w') as csv:
                 for i in range(length(bahan)):
                     data=bahan[i]
-                    csv_line = ';'.join(str(x) for x in data) + '\n'
+                    csv_line = ''
+                    for j in range(3):
+                        csv_line += str(data[j])
+                        if j < 2:
+                            csv_line += ';'
+                    csv_line += '\n'
                     csv.write(csv_line)
             with open(f"Save/{nama_folder}/candi.csv", 'w') as csv:
                 for i in range(length(candi)):
                     data=candi[i]
-                    csv_line = ';'.join(str(x) for x in data) + '\n'
+                    csv_line = ''
+                    for j in range(5):
+                        csv_line += str(data[j])
+                        if j < 4:
+                            csv_line += ';'
+                    csv_line += '\n'
                     csv.write(csv_line)
     else:
         os.makedirs("Save")

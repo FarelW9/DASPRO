@@ -40,7 +40,6 @@ if valid:
                 print("Tidak bisa mengakses command “hapusjin” selain Bandung Bondowoso.")
             else:
                 data_user,data_candi=hapus
-            print(data_candi)
         elif command=="ubahjin" :
             ubah=ubahjin(data_user,role) 
             if ubah==1:
