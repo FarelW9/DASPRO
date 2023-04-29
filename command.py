@@ -154,7 +154,23 @@ def kumpul():
 
 
 def batchkumpul():
-    return 0
+    if data_user[2] != "bandung_bondowoso":
+        print("Batch kumpul hanya bisa diakses oleh akun Bandung Bondowoso!")
+        return
+    else:
+        print("Batch kumpul hanya dapat diakses oleh akun Bandung Bondowoso!")
+        return
+    def single_kumpul():
+        #Meng-generate jumlah yang dikumpul untuk setiap bahan.
+        pasir = random.randint(0,5)
+        batu = random.randint(0,5)
+        air = random.randint(0,5)
+        return [pasir,batu,air]
+    counter = 0
+    pasir = 0
+    batu = 0
+    air = 0
+    #Belum selesai
 
 
 def find_jinterajin_jintermalas(data):
@@ -216,8 +232,7 @@ def laporanjin():
 
 def hancurkancandi():
     #Akses oleh Roro Jongrang
-    if data_user:
-        if data_user[2] != "roro_jongrang":
+    if role != "roro_jongrang":
             print("Hancurkan candi hanya dapat diakses oleh Roro Jongrang!")
             return
     else:
